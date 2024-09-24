@@ -1,2 +1,5 @@
 ./notebook.pdf
 ./theoretical.pdf
+theoretical.pdf
+notebook.pdf
+.gitignore
