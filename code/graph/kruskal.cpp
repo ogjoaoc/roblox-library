@@ -1,5 +1,6 @@
 // Ordena as arestas por peso,  insere se ja nao estiver no mesmo componente
 // O(E log E)
+
 struct DSU {
     vector<int> par, rank, sz;
     int c;
