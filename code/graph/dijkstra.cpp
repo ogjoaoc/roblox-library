@@ -1,5 +1,5 @@
-// Caminho mínimo com pesos positivos.
-// Complexidade: O((V + E) log V).
+// SSP com pesos positivos.
+// O((V + E) log V).
 vector<int> dijkstra(int S) {
     vector<bool> vis(MAXN, 0);
     vector<ll> dist(MAXN, LLONG_MAX);
