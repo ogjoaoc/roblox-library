@@ -1,0 +1,242 @@
+\subsubsection{Fundamentos}
+\paragraph{Maior Divisor Comum (MDC).} Dados dois inteiros não-negativos $a$ e $b$, o maior número que é um divisor de tanto de $a$ quanto de $b$ é chamado de MDC.
+$$\gcd(a,b)=max\{d > 0 : (d|a) \land (d|b)\}$$
+
+\paragraph{Menor Múltiplo Comum (MMC).} Dados dois inteiros não-negativos $a$ e $b$, o menor número que é múltiplo de tanto de $a$ quanto de $b$ é chamado de MMC.
+$$lcm(a,b)=\frac{ab}{\gcd(a,b)}$$
+
+\paragraph{Equação Diofantina Linear.} Um Equação Diofantina Linear é uma equação de forma geral:
+$$ax +by=c,$$
+onde $a$,$b$,$c$ são inteiros dados, e $x$,$y$ são inteiros desconhecidos.
+
+Para achar uma solução de uma equação Diofantina com duas incógnitas, podemos utilizar o algoritmo de Euclides. Quando aplicamos o algoritmo em $a$ e $b$, podemos encontrar seu MDC $d$ e dois números $x_d$ e $y_d$ tal que:
+$$a\cdot x_d+b\cdot y_d = d.$$
+
+Se $c$ é divisível por $d = \gcd(a,b)$, logo a equação Diofantina tem solução, caso contrário ela não tem nenhuma solução. 
+
+Supondo que $c$ é divisível por $g$, obtemos:
+$$a\cdot(x_d\cdot\frac{c}{d})+b\cdot(y_d\cdot\frac{c}{d})=c.$$
+
+Logo uma das soluções da equação Diofantina é:
+$$x_0 = x_d\cdot\frac{c}{d}$$ $$y_0=y_d\cdot\frac{c}{d}.$$
+
+A partir de uma solução $(x_0,y_0)$, podemos obter todas as soluções. São soluções da equação Diofantina todos os números da forma:
+$$x = x_0+k\cdot\frac{b}{d}$$ $$y = y_0-k\cdot\frac{a}{d}.$$
+
+\paragraph{Números de Fibonacci.} A sequência de Fibonacci é definida da seguinte forma: 
+$$F_n = \begin{cases}
+            0,\textnormal{se } n=0 \\
+            1,\textnormal{se } n=1 \\
+            F_{n-1}+F_{n-2},\textnormal{caso contrário}
+        \end{cases}$$
+
+Os 11 primerios números da sequência são:
+\begin{center}
+    \begin{tabular}{c|c c c c c c c c c c c}
+        $n$ & 0 &1&2&3&4&5&6&7&8&9&10\\
+        \hline
+        $F_n$&0&1&1&2&3&5&8&13&21&34&55
+    \end{tabular}
+    
+\end{center}
+
+\textbf{Propriedades.}
+\begin{itemize}
+    \item Identidade de Cassini: $F_{n-1}F_{n+1}-{F_n}^2 = (-1)^n$
+    \item Regra da adição: $F_{n+k} = F_kF_{n+1}+F_{k-1}F_n$
+    \item Identidade do MDC: $\gcd(F_n,F_m)=F_{\gcd(n,m)}$
+\end{itemize}
+
+\textbf{Fórmulas para calcular o n-ésimo número de Fibonacci.}
+
+\begin{itemize}
+    \item Forma matricial: 
+    $$\begin{vmatrix}
+        1 & 1 \\
+        1 & 0
+    \end{vmatrix}^n 
+    = 
+    \begin{vmatrix}
+        F_{n+1} & F_{n} \\
+        F_{n} & F_{n-1} 
+    \end{vmatrix}$$
+\end{itemize}
+
+\subsubsection{Funções}
+\paragraph{Função Totiente de Euler.} A função-phi $\phi(n)$ conta o número de inteiros entre 1 e $n$ incluso, nos quais são coprimos com $n$. Dois números são coprimos se o MDC deles é igual a 1.
+
+\textbf{Propriedades.}
+\begin{multicols}{2}
+    \begin{itemize}
+        \item Se $p$ é primo, logo o $\gcd(p,q) = 1$ para todo $1\leq q < p$. Logo,
+        $$\phi(p) = p-1$$
+        \item Se $p$ é primo e $k \ge 1$, então há exatos $p^k/p$ números entre 1 e $p^k$ que são divisíveis por $p$. Portanto,
+        $$\phi(p^k) = p^k - p^{k-1} = p^{k-1}(p-1)$$
+        \item Se $a$ e $b$ forem coprimos ou não, então:
+        $$\phi(ab)=\phi(a)\cdot \phi(b) \cdot \frac{d}{\phi(d)},\quad d = \gcd(a,b)$$
+        \item Fórmula do produto de Euler:
+        $$\phi(n)=n\prod_{p|n}(1-\frac{1}{p})$$
+        \item Soma dos divisores:
+        $$n = \sum_{d|n}\phi(d)$$
+    \end{itemize}
+    
+\end{multicols}
+
+\textbf{Aplicações:}
+\begin{itemize}
+    \item Teorema de Euler: Seja $m$ um inteiro positivo e $a$ um inteiro coprimo com $m$, então:
+    $$a^{\phi(m)} \equiv 1 \pmod m$$
+    $$a^n \equiv a^{n \pmod \phi(m)} \pmod m$$
+    
+    \item Generalização do Teorema de Euler: Seja $x$,$m$ inteiros positivos e $n \ge \log_2m$,
+    $$x^n \equiv x^{\phi(m)+[n \pmod{\phi(m)}]} \pmod m$$
+    
+    \item Teoria dos Grupos: $\phi(n)$ é a ordem de um grupo multiplicativo mod n $(\mathbb{Z}/n\mathbb{Z})^{\times}$, que é o grupo dos elementos com inverso multiplicativo (aqueles coprimos com $n$). A ordem multiplicativa de um elemento $a$ mod $m$ ($\textnormal{ord}_m(a)$), na qual também é o tamanho do subgrupo gerado por $a$, é o menor $k > 0$ tal que $a^k \equiv 1 \pmod m$. Se a ordem multiplicativa de $a$ é $\phi(m)$, o maior possível, então $a$ é \textbf{raiz primitiva} e o grupo é cíclico por definição.
+    
+\end{itemize}
+
+\paragraph{Número de Divisores.} Se a fatoração prima de $n$ é $p_1^{e_1}\cdot p_2^{e_2}\dots  p_k^{e_k}$, onde $p_i$ são números primos distintos, então o número de divisores é dado por:
+$$d(n) = (e_1+1)\cdot(e_2+1) \dots (e_k+1)$$
+
+Um número altamente composto (HCN) é um número inteiro que possui mais divisores do que qualquer número inteiro positivo menor.
+
+\begin{center}
+    \begin{tabular}{c|c|c|c|c|c|c|c|c}
+        $n$ & 6 & 60&360&5040&83160&720720&735134400&74801040398884800 \\
+        \hline
+        $d(n)$ & 4&12&24&60&128&240&1344&64512
+    \end{tabular}
+\end{center}
+
+\paragraph{Soma dos Divisores.} Para $n = p_1^{e_1}\cdot p_2^{e_2}\dots p_k^{e_k}$ temos a seguinte fórmula:
+$$\sigma(n) = \frac{p_1^{e_1+1}-1}{p_1-1} \cdot \frac{p_2^{e_2+1}-1}{p_2-1}  \dots  \frac{p_k^{e_k+1}-1}{p_k-1}$$
+
+\paragraph{Contagem de números primos.} A função $\pi(n)$ conta a quantidade de números primos menores ou iguais à algum número real $n$. Pelo Teorema do Número Primo, a função tem crescimento aproximado à $\frac{x}{\ln(x)}$.
+
+\begin{center}
+    \begin{tabular}{c|c|c|c|c|c|c|c|c}
+        $n$ &10&$10^2$&$10^3$&$10^4$&$10^5$&$10^6$&$10^7$&$10^8$ \\
+        \hline
+        $\pi(n)$ &4&25&168&1229&9592&78489&664579&5761455
+        
+    \end{tabular}
+\end{center}
+
+\subsubsection{Aritmética Modular}
+Dado um inteiro $m \ge 1$, chamado módulo, dois inteiros $a$ e $b$ são ditos congruentes módulo $m$, se existe um inteiro $k$ tal que
+$$a-b = km,$$
+
+Congruência módulo $m$ é denotada: $a \equiv b \pmod m$
+
+\textbf{Propriedades.}
+\begin{multicols}{2}
+    \begin{itemize}
+        \item $(a \pm b) \pmod m = (a \mod m \pm b \mod m) \pmod m$.
+        \item $(a \cdot b) \pmod m = (a \mod m)\cdot(b\mod m) \pmod m$.
+        \item $a^b \pmod m = (a \mod m)^b \pmod m$.
+        \item $a \pm k \equiv b \pm k \pmod m$, para qualquer inteiro $k$.
+        \item $a \cdot k \equiv b \cdot k \pmod m$, para qualquer inteiro $k$.
+        \item $a \cdot k \equiv b \cdot k \pmod {k\cdot m}$, para qualquer inteiro $k$.
+    \end{itemize}
+    
+\end{multicols}
+
+\paragraph{Inverso Multiplicativo Modular.} O inverso multiplicativo modular de um número $a$ é um inteiro $a^{-1}$ tal que
+$$a\cdot a^{-1} \equiv 1 \pmod m.$$
+
+O inverso modular existe se, e somente se, $a$ e $m$ são coprimos.
+
+Um método para achar o inverso modular é usando o Teorema de Euler. Multiplicando ambos os lados da equação do teorema por $a^{-1}$ obtemos:
+$$a^{\phi(m)} \equiv 1 \pmod m \xrightarrow{\times (a^{-1})} a^{\phi(m)-1} \equiv a^{-1} \pmod m$$
+
+\paragraph{Equação de Congruência Linear.} Essa equação é da forma:
+$$a\cdot x \equiv b \pmod m,$$
+onde $a$,$b$ e $m$ são inteiros conhecidos e $x$ uma incógnita.
+
+Uma forma de achar uma solução é via achando o elemento inverso. Seja $g = \gcd(a,m)$, se $b$ não é divisível por $g$, não há solução. 
+
+Se $g$ divide $b$, então ao dividir ambos os lados da equação por $g$ ($a$,$b$ e $m$), recebemos uma nova equação:
+$$a'\cdot x \equiv b' \pmod{m'}.$$
+
+Como $a'$ e $m'$ são coprimo, podemos encontrar o inverso $a'$, e multiplicar ambos os lados da equação pelo inverso, e então obtemos uma solução única.
+$$x \equiv b'\cdot a'^{-1} \pmod{m'}$$
+
+A equação original possui exatas $g$ soluções, e elas possuem a forma:
+$$x_i \equiv (x + i\cdot m') \pmod m, \quad 0 \leq i \leq g-1.$$
+
+\paragraph{Teorema do Resto Chinês.} Seja $m=m_1\cdot m_2 \cdot \dots \cdot m_k$, onde $m_i$ são coprimos dois a dois. Além de $m_i$, recebemos também um sistema de congruências
+$$
+\begin{cases}
+    a \equiv a_1 \pmod {m_1} \\
+    a \equiv a_2 \pmod {m_2} \\
+    \vdots \\
+    a \equiv a_k \pmod {m_k}
+\end{cases}
+$$
+onde $a_i$ são constantes dadas. O teorema afirma que o sistema de congruências dado sempre tem uma e apenas uma solução módulo $m$.
+
+Seja $M_i = \prod_{i \neq j} m_j$, o produto de todos os módulos menos $m_i$, e $N_i$ os inversos modulares $N_i = M_i^{-1} \mod m_i$. Então, a solução do sistema de congruências é:
+$$a \equiv \sum_{i=1}^{k} a_iM_iN_i \pmod{m_1\cdot m_2 \cdot \dots m_k}.$$
+
+Para módulos não coprimos, o sistema de congruências tem exatas uma solução módulo $lcm(m_1,m_2,\dots,m_k)$, ou tem nenhuma solução.
+
+Uma única congruência $a \equiv a_i \pmod{m_i}$ é equivalente ao sistema de congruências $a \equiv a_i \pmod{p_j^{n_j}}$, onde $p_1^{n_1}p_2^{n_2}\dots p_k^{n_k}$ é a fatoração prima de $m_i$. A congruência com o maior módulo de potência prima será a congruência mais forte dentre todas as congruências com a mesma base prima. Ou dará uma contradição com alguma outra congruência, ou implicará já todas as outras congruências.
+
+Se não há contradições, então o sistema de equações tem uma solução. Podemos ignorar todas as congruências, exceto aquelas com os módulos de maior potência de primo. Esses módulos agora são coprimos e, portanto, podemos resolver com o algoritmo do caso geral.
+
+\paragraph{Logaritmo discreto.} Sejam $a$, $b$, $k$, $m$ inteiros, queremos encontrar $x$ tal que a equação seja válida:
+$$ka^x \equiv b \pmod{m}.$$
+
+Para encontrá-lo:
+\begin{enumerate}
+    \item Reescrevemos $x=np-q$, onde obteremos a seguinte equação:
+    $$ka^{np-q} \equiv b \pmod{m}, \quad n = \sqrt{m}+1.$$
+    \item No caso de $g = \gcd(a,m) = 1$, obtemos:
+    $$ka^{np} \equiv ba^q \pmod{m}.$$
+    \item Caso contrário:
+    \begin{enumerate}
+        \item Se $g \nmid b$, a equação não possui solução.
+        \item Se $g \mid b$, escrevemos $a=g\alpha$, $b=g\beta$, $m=g\mu$, e obtemos a seguinte equação:
+        $$k(g\alpha)a^{x-1} \equiv g\beta \pmod{g\mu}$$
+        $$(k\alpha)a^{x-1} \equiv \beta \pmod{\mu}$$
+    \end{enumerate}
+    \item Para todo $q \in [0,n]$, calculamos todos os valores possíveis de $f_1(q) = ba^q \pmod{m}$.
+    \item Por fim, para todo $p \in [0,n]$, calculamos todos os valores possíveis de $f_2(p) = ka^{np} \pmod{m}$ até encontrarmos um valor $p$ tal que
+    $$f_1(q) = f_2(p).$$
+\end{enumerate}
+
+Seguindo esses passos, iremos encontrar o menor $x$ que tornará a equação válida.
+
+\paragraph{Raiz primitiva.} Um número $g$ é raiz primitiva módulo $m$ se e somente se para qualquer inteiro $a$ tal que $\gcd(a,n) = 1$, existe um inteiro $k$ tal que:
+$$g^k \equiv a \pmod m.$$
+
+$k$ é chamado de índice ou logaritmo discreto de $a$ na base $g$ módulo $m$. $g$ é chamado de generador do grupo multiplicativo dos inteiros módulo $m$.
+
+A raiz primitiva módulo $m$ existe se e somente se:
+\begin{itemize}
+    \item $m$ é 1,2,4, ou
+    \item $m$ é um potência de um primo ímpar $(m = p^k)$, ou
+    \item $m$ é o dobro de uma potência de um primo ímpar $(m = 2\cdot p^k)$.
+\end{itemize}
+
+Para encontrar a raiz primitiva:
+\begin{enumerate}
+    \item Encontrar $\phi(m)$ (Função Totiente de Euler) e fatorizá-lo.
+    \item Iterar por todos os números $g \in [1,m]$, e para cada número, para verificar se é raiz primitiva, fazemos:
+    \begin{enumerate}
+        \item Calcular todos $g^{\frac{\phi(m)}{p_i}} \pmod m$.
+        \item Se todos o valores são diferentes de 1, então $g$ é uma raiz primitiva.
+    \end{enumerate} 
+\end{enumerate}
+
+\paragraph{Raiz discreta.} Sejam $k$, $a$ inteiros e $m$ um primo, queremos encontrar todo $x$ tal que:
+$$x^k \equiv a \pmod{m}.$$
+
+Seja $g$ a raiz primitiva módulo $m$, podemos representar a raiz discreta como uma potência de $g$. Assim, podemos reescrever a equação como:
+$$x^k \equiv (g^y)^k \equiv a \pmod{m}$$
+$$(g^k)^y \equiv a \pmod{m}.$$
+
+Por fim, basta resolver o logaritmo discreto para descobrir uma solução.
+
+Ao achar uma solução $x_0 = g^{y_0} \pmod{m}$, as demais soluções possuem a forma:
+$$x_i = g^{y_0+i\frac{\phi(m)}{\gcd(\phi(m),k)}}, \quad i \in \mathbb{Z}.$$

@@ -1,4 +1,4 @@
-\subsection{Geometria Básica}
+\subsubsection{Geometria Básica}
 \paragraph{Produto Escalar.}
 Geometricamente é o produto do comprimento do vetor $a$ pelo comprimento da projeção do vetor $b$ sobre $a$.
 
@@ -6,7 +6,6 @@ $$a \cdot b = \|a\|\cos\theta \|b\| = x_1x_2+y_1y_2+z_1z_2$$
 
 \paragraph{Propriedades.} \empty
 
-\begin{multicols}{2}
 	\begin{enumerate}
 		\item $a \cdot b = b \cdot a$.
 		\item $(\alpha \cdot a) \cdot b = \alpha\cdot(a \cdot b)$.
@@ -16,7 +15,6 @@ $$a \cdot b = \|a\|\cos\theta \|b\| = x_1x_2+y_1y_2+z_1z_2$$
 		\item Ângulo entre os vetores: $\cos^{-1}{\frac{a \cdot b}{\|a\|\|b\|}}$.
 		\item $a \cdot b$ é negativo se o ângulo entre $a$ e $b$ é agudo, positivo se obtusoe igual à 0 eles formam um ângulo reto.	
 	\end{enumerate}
-\end{multicols}
 
 \paragraph{Produto Vetorial.}
 Dados dois vetores independentes linearmente $a$ e $b$, o produto vetorial $a \times b$ é um vetor perpendicular ao vetor $a$ e ao vetor $b$ e é a normal do plano contendo os dois vetores.
@@ -42,7 +40,6 @@ Dados dois vetores independentes linearmente $a$ e $b$, o produto vetorial $a \t
 
 \paragraph{Propriedades.} \empty
 
-\begin{multicols}{2}
 	\begin{enumerate}
 		\item $a \times b = -b \times a$.
 		\item $(\alpha \cdot a) \times b = \alpha \cdot (a \times b)$.
@@ -53,7 +50,6 @@ Dados dois vetores independentes linearmente $a$ e $b$, o produto vetorial $a \t
 		\item Área do paralelogramo formado por $a$ e $b$: $|e_z \cdot (a \times b)| = |x_1y_2-y_1x_2|$.
 		\item O sinal do coeficiente $e_z$ do produto vetorial indica a orientação relativa dos vetores. Se positivo, o ângulo de $a$ e $b$ é anti-horário. Se negativo, o ângulo é horário e se for zero, os vetores são colineares.
 	\end{enumerate}
-\end{multicols}
 
 	\paragraph{Distância entre dois pontos.} Dados dois pontos $a = (x_1,y_2)$ e $b = (x_2,y_2)$, a distância entre $a$ e $b$ é dada por:
 		$$d_{a,b} = \sqrt{(x_1 - x_2)^2 + (y_1 - y2)^2}$$
@@ -125,11 +121,10 @@ Há três possibilidades como solução do sistema:
 			\item Reta secante à circuferência: duas soluções. A reta cruza a circuferência em 2 pontos distintos.
 		\end{enumerate}
 
-\subsection{Geometria Plana}
+\subsubsection{Geometria Plana}
 
 \paragraph{Triângulos.} Polígono com três vértices e três arestas. Uma aresta arbitrária é escolhida como a base e, nesse caso, o vértice oposto é chamado de ápice. Um triângulo com vértices $A$, $B$ e $C$ é denotado $\triangle ABC$.
 
-\begin{multicols}{2}
 	\begin{itemize}
 		\item Comprimento dos lados: $a,b,c$
 		\item Semiperímetro: $p = \frac{a+b+c}{2}$
@@ -148,11 +143,9 @@ Há três possibilidades como solução do sistema:
 		\item Raio inscrito: $r = \frac{1}{p}A$
 		\item Tamanho da mediana: $m_a = \frac{1}{2}\sqrt{2b^2+2c^2-a^2}$
 	\end{itemize}
-\end{multicols}
 
 \noindent \textbf{Quadriláteros.} Polígono de quatro lados, tendo quatro arestas e quatro vértices. Um quadrilátero com vértices $A$, $B$, $C$ e $D$ é denotado com $\square ABCD$.
 
-\begin{multicols}{2}
 	\begin{itemize}
 		\item Comprimento dos lados: $a,b,c,d$
 		\item Semiperímetro: $p = \frac{a+b+c+b}{2}$
@@ -178,11 +171,9 @@ Há três possibilidades como solução do sistema:
 			\item Trapézio: $\sqrt{h^2 + \frac{(B-b)^2}{4h}}$
 		\end{itemize}
 	\end{itemize}
-\end{multicols}
 
 \paragraph{Círculos.} Forma que consiste em todos os pontos de um plano que estão a uma determinada distância de um ponto dado, o centro. A distância entre qualquer ponto do círculo e o centro é chamada de raio.
 
-\begin{multicols}{2}
 	\begin{itemize}
 		\item Área: $A = \pi r^2$
 		\item Perímetro: $C = 2\pi r$
@@ -191,15 +182,14 @@ Há três possibilidades como solução do sistema:
 		\item Comprimento do arco: $L = r\theta$
 		\item Perímetro do setor circular: $P = r(\theta+2)$
 	\end{itemize}
-\end{multicols}
 
 \paragraph{Teorema de Pick.} Suponha que um polígono tenha coordenadas inteiras para todos os seus vértices. Seja $i$ o número de pontos inteiros no interior do polígono e $b$ o número de pontos inteiros na sua fronteira (incluindo vértices e pontos ao longo dos lados). Então, a área $A$ deste polígono é:
 $$A = i + \frac{b}{2} -1.$$
 $$b = \gcd(|x_2-x_1|,|y_2-y_1|)+1.$$
 
-\subsection{Geometria Espacial}
+\subsubsection{Geometria Espacial}
 
-\begin{multicols}{2}
+
 	\begin{itemize}
 		\item Área da Superfície:
 		\begin{itemize}
@@ -222,12 +212,12 @@ $$b = \gcd(|x_2-x_1|,|y_2-y_1|)+1.$$
 		\end{itemize}
 
 	\end{itemize}
-\end{multicols}
+
 
 \paragraph{Fórmula de Euler para Poliedros.} Os números de faces, vértices e arestas de um sólido não são independentes, mas estão relacionados de uma maneira simples.
 $$F + V - A = 2.$$
 
-\subsection{Trigonometria}
+\subsubsection{Trigonometria}
 \paragraph{Funções Trigonométricas.}
 	$$\sin\theta = \frac{\textnormal{cateto oposto a }\theta}{\textnormal{hipotenusa}}  \quad \cos\theta = \frac{\textnormal{cateto adjacente a }\theta}{\textnormal{hipotenusa}} \quad \tan\theta = \frac{\textnormal{cateto oposto a }\theta}{\textnormal{cateto adjacente a}\theta}$$
 
@@ -247,7 +237,7 @@ $$F + V - A = 2.$$
 \end{center}
 
 \textbf{Propriedades.}
-\begin{multicols}{2}
+
 	\begin{enumerate}
 		\item $\sin(a+b) = \sin a \cos b + \cos a \sin b$
 		\item $\cos(a+b) = \cos a \cos b - \sin a \sin b$
@@ -269,4 +259,3 @@ $$F + V - A = 2.$$
 		\end{itemize}
 
 	\end{enumerate}
-\end{multicols}
