@@ -1,7 +1,7 @@
-// Printa os nós na ordem em que são visitados
-// Explora os nós em largura (camadas)
-// Complexidade: O(V+A) V = vértices e A = arestas
-// Espaço: O(V)
+// Printa os nos na ordem em que são visitados
+// Explora em largura (camadas)
+// Complexidade: O(V+A) V = vertices e A = arestas
+// Espaco: O(V)
 // Uso: busca pelo caminho mais curto
 
 void bfs(vector<vector<int>>&grafo, int inicio){
