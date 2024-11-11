@@ -1,9 +1,9 @@
 // a^e mod m
 // O(log n)
 
-ll fexp(ll a, ll e, ll m) {
+int fexp(int a, int e, int m) {
     a %= m;
-    ll ans = 1;
+    int ans = 1;
     while (e > 0){
         if (e & 1) ans = ans*a % m;
         a = a*a % m;
@@ -11,4 +11,3 @@ ll fexp(ll a, ll e, ll m) {
     }
     return ans%m;
 }
-
