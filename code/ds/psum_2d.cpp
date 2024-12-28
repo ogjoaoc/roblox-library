@@ -1,18 +1,15 @@
-// entrada: matrix com ponto e X
-// saber em O(1) quantidade de X em um retangulo
-
-vector<vector<int>> v(n+1, vector<int>(n+1, 0));
+vector<vector<int>> psum(n+1, vector<int>(m+1, 0));
  
 for (int i=1; i<n+1; i++){
-    for (int j=1; j<n+1; j++){
-        char x; cin >> x;
-        if (x == 'X') v[i][j] += 1 + v[i][j-1] + v[i-1][j] - v[i-1][j-1];
-        else v[i][j] = v[i][j-1] + v[i-1][j] - v[i-1][j-1];
+    for (int j=1; j<m+1; j++){
+        cin >> psum[i][j];
+        psum[i][j] += psum[i-1][j]+psum[i][j-1]-psum[i-1][j-1];
     }
 }
 
-// Pegar retângulo (x, y) - (z, w)
-// ponto superior esquerdo e inferior direito
+int retangulo(int x1, int y1, int x2, int y2){
+    z = min(x2, n), w = min(y2, m);
+    x = max(0LL, x1-1), y = max(0LL, y1-1);
 
-cin >> x >> y >> z >> w;
-cout << v[z][w] - v[x-1][w] - v[z][y-1] + v[x-1][y-1] << endl;
+    return psum[x2][y2]-psum[x1][y2]-psum[x2][y1]+psum[x1][y1];
+}
