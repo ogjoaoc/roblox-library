@@ -1,3 +1,4 @@
+// retangulo retorna a psum2d do intervalo inclusivo
 vector<vector<int>> psum(n+1, vector<int>(m+1, 0));
  
 for (int i=1; i<n+1; i++){
