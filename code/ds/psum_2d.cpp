@@ -8,7 +8,8 @@ for (int i=1; i<n+1; i++){
     }
 }
 
-int retangulo(int x1, int y1, int x2, int y2){
+// y1 eh variavel reservada
+int retangulo(int x1, int yy1, int x2, int yy2){
     x2 = min(x2, n), y2 = min(y2, m);
     x1 = max(0LL, x1-1), y1 = max(0LL, y1-1);
 
