@@ -5,15 +5,12 @@
 // chamar a função preprocess com a raiz da árvore
 
 struct LCA {
-    int n, l = 30, timer;
+    int n, l, timer;
     vector<vector<int>> adj;
     vector<int> tin, tout;
     vector<vector<int>> up;
 
-    LCA(int n, const vector<vector<int>>& adj) : n(n), adj(adj), tin(n), tout(n), up(n, vector<int>(l)) {
-        l = ceil(log2(n));
-        timer = 0;
-    }
+    LCA(int n, const vector<vector<int>>& adj) : n(n), adj(adj) {}
 
     void dfs(int v, int p) {
         tin[v] = ++timer;
@@ -46,6 +43,11 @@ struct LCA {
     }
 
     void preprocess(int root) {
+        tin.resize(n);
+        tout.resize(n);
+        timer = 0;
+        l = ceil(log2(n));
+        up.assign(n, vector<int>(l + 1));
         dfs(root, root);
     }
 };
