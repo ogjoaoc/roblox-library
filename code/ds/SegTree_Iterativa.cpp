@@ -1,5 +1,6 @@
 // Exemplo de uso: 
 // SegTree<int> st(vetor);
+// range query e point update
 
 template <typename T>
 struct SegTree {
