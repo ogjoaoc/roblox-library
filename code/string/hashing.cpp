@@ -18,11 +18,11 @@ struct Hash {
             hi[i] = (s[i] + (i+1<n ? hi[i+1]:0) * X) % MOD;
     }
     int query(int l, int r) {
-        ll hash = (h[r] - (l ? h[l-1]*p[r-l+1]%MOD : 0));
+        int hash = (h[r] - (l ? h[l-1]*p[r-l+1]%MOD : 0));
         return hash < 0 ? hash + MOD : hash;
     }
     int query_inv(int l, int r) {
-        ll hash = (hi[l] - (r+1 < n ? hi[r+1]*p[r-l+1] % MOD : 0));
+        int hash = (hi[l] - (r+1 < n ? hi[r+1]*p[r-l+1] % MOD : 0));
         return hash < 0 ? hash + MOD : hash;
     }
 };
