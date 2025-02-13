@@ -1,6 +1,7 @@
 // Returns the number of distinct permutations 
 // that are lexicographically less than the string t 
 // using the provided frequency (freq) of the characters
+// O(n*freq.size())
 int countPermLess(vector<int> freq, const string &t) {
     int n = t.size();
     int ans = 0;
