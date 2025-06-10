@@ -1,3 +1,21 @@
+\subsubsection{Propriedades do Grau dos Vértices}
+\begin{itemize}
+    \item A soma de todos os graus dos vértices do grafo é igual a 
+    \[
+    \sum_{i=1}^{n} d(v_i) = 2m
+    \]
+    \item A soma dos graus é sempre um número par.
+    \item O número de vértices de grau ímpar em um grafo é sempre par.
+\end{itemize}
+
+\subsubsection{Passeio, Trilha, Caminho e Ciclo}
+\begin{itemize}
+    \item \textbf{Passeio}: sequência de vértices onde cada par consecutivo está conectado.
+    \item \textbf{Trilha}: passeio sem repetição de arestas.
+    \item \textbf{Caminho}: trilha sem repetição de vértices.
+    \item \textbf{Ciclo}: caminho fechado com comprimento $\ge2$.
+\end{itemize}
+
 \subsubsection{Caminhos}
 \subsubsection*{Caminho de Euler} 
 Um caminho de Euler em um grafo é o caminho que visita cada aresta exatamente uma vez. Um ciclo de Euler, ou Tour de Euler, em um grafo é um ciclo que usa cada aresta exatamente uma vez.
@@ -13,4 +31,28 @@ Um caminho Hamiltoniano em um grafo é o caminho que visita cada vértice exatam
     \item Teorema de Ore: Um grafo simples com $n$ vértices $(n\ge 3)$ é Hamiltoniano se, para cada par de vértices não-adjacentes, a soma de seus graus é $\ge n$.
     \item Ghouila-Houiri: Um grafo direcionado simples fortemente conexo com $n$ vértices é Hamiltoniano se cada vértice tem um grau $\ge n$.
     \item Meyniel: Um grafo direcionado simples fortemente conexo com $n$ vértices é Hamiltoniano se a soma dos graus de cada par de vértices não-adjacentes é $\ge 2n-1$.
+\end{itemize}
+
+\subsubsection{Árvores}
+\subsubsection*{Propriedades Fundamentais}
+\begin{itemize}
+    \item Todo par de vértices tem exatamente \textbf{um caminho simples} único entre eles.
+    \item Remover qualquer aresta desconecta o grafo.
+    \item Adicionar qualquer aresta cria exatamente um ciclo.
+    \item Fórmula de Euler: Para $n$ vértices, possui exatamente $n-1$ arestas.
+\end{itemize}
+
+\subsubsection*{Teoremas Importantes}
+\begin{enumerate}
+    \item \textbf{Centro de Árvore}: Toda árvore tem no máximo 2 centros (vértices de excentricidade mínima).
+    \item \textbf{Diâmetro}: Maior distância entre dois vértices (calculável via 2 BFS).
+    \item \textbf{Encaminhamento Único}: Para qualquer vértice $r$ (raiz), existe orientação natural das arestas.
+\end{enumerate}
+
+\subsubsection{Árvore Geradora Mínima (AGM)}
+\subsubsection*{Propriedades de AGM}
+\begin{itemize}
+\item \textbf{Unicidade}: Se pesos são distintos, a AGM é única.
+\item \textbf{Ciclo}: Para qualquer ciclo $C$ em $G$, a aresta mais pesada de $C$ não está na AGM.
+\item \textbf{Corte}: Para qualquer corte $(S, V\setminus S)$, a aresta mais leve cruzando o corte pertence à AGM.
 \end{itemize}
