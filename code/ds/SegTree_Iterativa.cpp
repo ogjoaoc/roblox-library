@@ -23,14 +23,14 @@ struct SegTree {
     }
 
     T range_query(int l, int r) {
-        T result = neutral_value;
-
+        T res_l = neutral_value, res_r = neutral_value;
+ 
         for (l += n, r += n + 1; l < r; l >>= 1, r >>= 1) {
-            if (l & 1) result = combine(result, tree[l++]);
-            if (r & 1) result = combine(result, tree[--r]);
+            if (l & 1) res_l = combine(res_l, tree[l++]);
+            if (r & 1) res_r = combine(tree[--r], res_r);
         }
-
-        return result;
+ 
+        return combine(res_l, res_r);
     }
 
     void update(int pos, T new_val) {
