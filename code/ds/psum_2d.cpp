@@ -1,4 +1,3 @@
-// retangulo retorna a psum2d do intervalo inclusivo
 vector<vector<int>> psum(n+1, vector<int>(m+1, 0));
  
 for (int i=1; i<n+1; i++){
@@ -8,10 +7,10 @@ for (int i=1; i<n+1; i++){
     }
 }
 
-// y1 eh variavel reservada
-int retangulo(int x1, int yy1, int x2, int yy2){
-    x2 = min(x2, n), yy2 = min(yy2, m);
-    x1 = max(0LL, x1-1), yy1 = max(0LL, yy1-1);
+// retorna a psum2d do intervalo inclusivo [(a, b), (c, d)]
+int retangulo(int a, int b, int c, int d){
+    c = min(c, h), d = min(d, w);
+    a = max(0LL, a-1), b = max(0LL, b-1);
 
-    return psum[x2][yy2]-psum[x1][yy2]-psum[x2][yy1]+psum[x1][yy1];
+    return v[c][d]-v[a][d]-v[c][b]+v[a][b];
 }
