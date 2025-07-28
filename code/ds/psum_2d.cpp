@@ -1,7 +1,7 @@
-vector<vector<int>> psum(n+1, vector<int>(m+1, 0));
+vector<vector<int>> psum(h+1, vector<int>(w+1, 0));
  
-for (int i=1; i<n+1; i++){
-    for (int j=1; j<m+1; j++){
+for (int i=1; i<=h; i++){
+    for (int j=1; j<=w; j++){
         cin >> psum[i][j];
         psum[i][j] += psum[i-1][j]+psum[i][j-1]-psum[i-1][j-1];
     }
