@@ -1,41 +1,57 @@
+const int MAXN = 200005; 
+int N; 
 int LOG;
- 
+
+vector<vector<int>> adj;
+vector<int> profundidade;
+vector<vector<int>> cima; // cima[v][j] é o 2^j-ésimo ancestral de v
+
+void dfs(int v, int p, int d) {
+    profundidade[v] = d;
+    cima[v][0] = p; // o pai direto é o 2^0-ésimo ancestral
+    for (int j = 1; j < LOG; j++) {
+        // se o ancestral 2^(j-1) existir, calculamos o 2^j
+        if (cima[v][j - 1] != -1) {
+            cima[v][j] = cima[cima[v][j - 1]][j - 1];
+        } else {
+            cima[v][j] = -1; // não tem ancestral superior
+        }
+    }
+    for (int nei : adj[v]) {
+        if (nei != p) {
+            dfs(nei, v, d + 1);
+        }
+    }
+}
+
+void build(int root) {
+    LOG = ceil(log2(N));
+    profundidade.assign(N + 1, 0);
+    cima.assign(N + 1, vector<int>(LOG, -1));
+    dfs(root, -1, 0); 
+}
+
 int get_lca(int a, int b) {
-    if(profundidade[b] > profundidade[a]) {
+    if (profundidade[a] < profundidade[b]) {
         swap(a, b);
     }
-    int k = profundidade[a] - profundidade[b]; // tanto que tenho que subir
-    for(int j = LOG-1; j >= 0; j--) {
-        if((1 << j) & k) {
+    // sobe 'a' até a mesma profundidade de 'b'
+    for (int j = LOG - 1; j >= 0; j--) {
+        if (profundidade[a] - (1 << j) >= profundidade[b]) {
             a = cima[a][j];
         }
     }
-    if(a == b) return a; // ja to no lca
- 
-    for(int j = LOG-1; j >= 0; j--) { // subo com os dois até chegar no lca fazendo binary lifting
-        if(cima[a][j] != cima[b][j]) {
+    // se 'b' era um ancestral de 'a', então 'a' agora é igual a 'b'
+    if (a == b) {
+        return a;
+    }
+
+    // sobe os dois nós juntos até encontrar os filhos do LCA
+    for (int j = LOG - 1; j >= 0; j--) {
+        if (cima[a][j] != -1 && cima[a][j] != cima[b][j]) {
             a = cima[a][j];
             b = cima[b][j];
         }
     }
     return cima[a][0];
 }
- 
-void dfs(int v, int p) {
-    if(v != 1) profundidade[v] = profundidade[p] + 1;
-    cima[v][0] = p;
-    for(int j = 1; j < LOG; j++) {
-        if (cima[v][j-1] != -1) {  
-            cima[v][j] = cima[cima[v][j-1]][j-1];
-        } else {
-            cima[v][j] = -1;  
-        }
-    }
-    for(auto &nei : adj[v]) {
-        if(nei != p) {
-            dfs(nei, v);
-        }
-    }
-}
- 
-while((1 << LOG) <= n) LOG++;
