@@ -16,3 +16,4 @@ void dfs(int v) {
     estado[v] = 2;
     ordem.push_back(v);
     return;
+}
