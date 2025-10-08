@@ -36,6 +36,11 @@ void shortest_paths(int n, int v0, vector<int>& dist, vector<int>& edge_to) {
     }
 }
 
+void add_edge(int from, int to, int capacity, int cost){
+    edges.push_back({from, to, capacity, cost, (int)edges.size()});
+    edges.push_back({to, from, 0, -cost, (int)edges.size()}); // reversa
+}
+
 int min_cost_flow(int N, int K, int s, int t) {
     adj.assign(N, vector<array<int, 2>>());
 
