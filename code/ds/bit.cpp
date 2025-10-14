@@ -1,35 +1,17 @@
-class BIT {
-    vector<int> bit;  
+struct BIT {
     int n;
-    int sum(int idx) {
-        int result = 0;
-        while (idx > 0) {
-            result += bit[idx];
-            idx -= idx & -idx;  
-        }
-        return result;
+    vector<int> bit;
+    BIT(int n = 0): n(n), bit(n + 1, 0) {}
+    void add(int i, int delta) {
+        for(; i <= n; i += i & -i) bit[i] += delta;
     }
-
-public:
-    BIT(int size) {
-        n = size;
-        bit.assign(n + 1, 0);  // BIT indexada em 1
+    int sum(int i) {
+        int r = 0;
+        for(; i > 0; i -= i & -i) r += bit[i];
+        return r;
     }
-    void update(int idx, int delta) {
-        while (idx <= n) {
-            bit[idx] += delta;
-            idx += idx & -idx;  
-        }
-    }
-    int query(int idx) {
-        return sum(idx);
-    }
-    int range_query(int l, int r) {
+    int range_sum(int l, int r){
+        if (r < l) return 0;
         return sum(r) - sum(l - 1);
     }
 };
-
-BIT fenwick(n);
-for(int i = 1; i <= n; i++) {
-    fenwick.update(i, arr[i]);
-}
