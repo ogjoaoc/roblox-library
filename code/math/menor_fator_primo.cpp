@@ -3,6 +3,7 @@ int spf[MAXN];
 vector<int> primos;
 
 void crivo() {
+    for (int i = 0; i < MAXN; i++) spf[i] = [i];
     for (int i = 2; i * i < MAXN; i++) {
         if (spf[i] == i) {
             for (int j = i * i; j < MAXN; j += i) {
@@ -51,4 +52,5 @@ int soma_dos_divisores(int n) {
         sod *= termo_soma;
     }
     return sod;
+
 }
