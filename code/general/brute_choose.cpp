@@ -2,7 +2,6 @@ vector<int> elements;
 int N, K;
 vector<int> comb;
 
-
 void brute_choose(int i) {
     if (comb.size() == K) {
         for (int j = 0; j < comb.size(); j++) {

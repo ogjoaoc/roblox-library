@@ -1,4 +1,4 @@
-const int MAXN = 1000001; // Limite para o Crivo.
+const int MAXN = 1000001; 
 int spf[MAXN];
 vector<int> primos;
 

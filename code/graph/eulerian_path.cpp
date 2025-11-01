@@ -1,17 +1,17 @@
 /**
- * Versão que assume: #define int long long
+ * versao que assume: #define int long long
  *
  * Retorna um caminho/ciclo euleriano em um grafo (se existir).
- * - g: lista de adjacência (vector<vector<int>>).
+ * - g: lista de adjacencia (vector<vector<int>>).
  * - directed: true se o grafo for dirigido.
- * - s: vértice inicial.
- * - e: vértice final (opcional). Se informado, tenta caminho de s até e.
+ * - s: vertice inicial.
+ * - e: vertice final (opcional). Se informado, tenta caminho de s ate e.
  * - O(Nlog(N))
- * Retorna vetor com a sequência de vértices, ou vazio se impossível.
+ * Retorna vetor com a sequencia de vertices, ou vazio se impossivel.
  */
 vector<int> eulerian_path(const vector<vector<int>>& g, bool directed, int s, int e = -1) {
     int n = (int)g.size();
-    // cópia das adjacências em multiset para permitir remoção específica
+    // copia das adjacencias em multiset para permitir remoção especifica
     vector<multiset<int>> h(n);
     vector<int> in_degree(n, 0);
     vector<int> result;
@@ -29,7 +29,7 @@ vector<int> eulerian_path(const vector<vector<int>>& g, bool directed, int s, in
         int out_e = (int)h[e].size();
         int diff_s = in_degree[s] - out_s;
         int diff_e = in_degree[e] - out_e;
-        if (diff_s * diff_e != -1) return {}; // impossível
+        if (diff_s * diff_e != -1) return {}; // impossivel
     }
     for (int u = 0; u < n; ++u) {
         if (e != -1 && (u == s || u == e)) continue;

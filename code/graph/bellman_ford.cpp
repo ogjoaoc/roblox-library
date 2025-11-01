@@ -2,7 +2,7 @@ struct Edge {
     int u, v, w;
 };
 
-// se x = -1, não tem ciclo
+// se x = -1, nao tem ciclo
 // se x != -1, pegar pais de x pra formar o ciclo
 
 int n, m;

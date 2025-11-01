@@ -1,7 +1,6 @@
 // Exemplo de uso: 
 // SegTree<int> st(vetor);
 // range query e point update
-
 template <typename T>
 struct SegTree {
     int n;
@@ -21,7 +20,6 @@ struct SegTree {
         for (int i = n - 1; i > 0; --i)
             tree[i] = combine(tree[i * 2], tree[i * 2 + 1]);
     }
-
     T range_query(int l, int r) {
         T res_l = neutral_value, res_r = neutral_value;
  
@@ -32,10 +30,8 @@ struct SegTree {
  
         return combine(res_l, res_r);
     }
-
     void update(int pos, T new_val) {
         tree[pos += n] = new_val;
-
         for (pos >>= 1; pos > 0; pos >>= 1)
             tree[pos] = combine(tree[2 * pos], tree[2 * pos + 1]);
     }

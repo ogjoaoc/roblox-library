@@ -17,7 +17,6 @@ vector<int> find_esq(vector<int> &v, bool maior) {
     return result;
 }
 
-// maior = true -> encontra o primeiro maior à direita
 vector<int> find_dir(vector<int> &v, bool maior) {
     int n = v.size();
     vector<int> result(n);

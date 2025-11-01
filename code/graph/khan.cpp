@@ -1,7 +1,7 @@
 // topo-sort DAG
 // lexicograficamente menor.
-// N: número de vértices (1-indexado)
-// adj: lista de adjacência do grafo
+// N: numero de vértices (1-indexado)
+// adj: lista de adjacencia do grafo
 
 const int MAXN = 5 * 1e5 + 2;
 vector<int> adj[MAXN];

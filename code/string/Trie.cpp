@@ -1,6 +1,4 @@
 // Trie por array
-// Inserção, busca e consulta de prefixo em O(N)
-
 int trie[MAXN][26];
 int tot_nos = 0;
 vector<bool> acaba(MAXN, false);

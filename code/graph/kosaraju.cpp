@@ -4,7 +4,7 @@ int component[MAXN];
 int N, m;
 vector<int> adj[MAXN], adj_rev[MAXN];
 
-// dfs no grafo original para obter a ordem (pós-order)
+// dfs no grafo original para obter a ordem (pos-order)
 void dfs1(int u) {
     vis[u] = true;
     for (int v : adj[u]) {

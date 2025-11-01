@@ -1,6 +1,6 @@
-// encontra um ciclo em g (direcionado ou não)
+// encontra um ciclo em g 
 // g[u] = vector<pair<id_aresta, vizinho>>
-// rec_arestas: true -> retorna ids das arestas do ciclo; false -> retorna vértices do ciclo
+// rec_arestas: true -> retorna ids das arestas do ciclo; false -> retorna vertices do ciclo
 // directed: grafo direcionado?
 
 const int MAXN = 5 * 1e5 + 2;
@@ -14,7 +14,7 @@ int ini_ciclo = -1, fim_ciclo = -1, back_edge_id = -1;
 bool dfs(int u, int pai_edge){
     color[u] = 1; // cinza
     for (auto [id, v] : g[u]) {
-        if (!DIRECTED && id == pai_edge) continue; // ignorar aresta de volta ao pai em não-dir
+        if (!DIRECTED && id == pai_edge) continue; // ignorar aresta de volta ao pai em n-dir
         if (color[v] == 0) {
             parent[v] = u;
             edgein[v] = id;
@@ -32,12 +32,12 @@ bool dfs(int u, int pai_edge){
     return false;
 }
 
-// retorna ids das arestas do ciclo (vazio se não há)
+// retorna ids das arestas do ciclo 
 vector<int> pega_ciclo(bool rec_arestas) {
     for (int u = 1; u <= N; u++) {
         if (color[u] != 0) continue;
         if (dfs(u, -1)) {
-            // reconstrói caminho u -> ... -> v via parent
+            // caminho u -> ... -> v via parent
             vector<int> path;
             int cur = ini_ciclo;
             path.push_back(cur);
@@ -48,7 +48,7 @@ vector<int> pega_ciclo(bool rec_arestas) {
             // path = [u, ..., v] -> inverter para [v, ..., u]
             reverse(path.begin(), path.end());
             if (!rec_arestas) return path;
-            // converte para ids das arestas: edgein[node] é a aresta que entra em node
+            // converte para ids das arestas: edgein[node] eh a aresta que entra em node
             vector<int> edges;
             for (int i = 1; i < path.size(); i++) edges.push_back(edgein[path[i]]);
             // adiciona a aresta de retorno u -> v

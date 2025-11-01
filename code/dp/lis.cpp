@@ -3,11 +3,10 @@ int lis_nlogn(vector<int> &v) {
     lis.push_back(v[0]);
     for (int i = 1; i < v.size(); i++) {
         if (v[i] > lis.back()) {
-            // estende a LIS.
+            // estende a lis
             lis.push_back(v[i]);
         } else {
-            // encontra o primeiro elemento em lis que é >= v[i].
-            // subsequência de mesmo comprimento, mas com um final menor.
+            // encontra o primeiro elemento em lis que >= v[i].
             auto it = lower_bound(lis.begin(), lis.end(), v[i]);
             *it = v[i];
         }
@@ -15,12 +14,11 @@ int lis_nlogn(vector<int> &v) {
     return lis.size();
 }
 
-// LIS NA ARVORE
+// lis na tree do problema da sub
 const int MAXN_TREE = 100001;
 vector<int> adj[MAXN_TREE];
 int values[MAXN_TREE];
 int ans = 0;
-
 
 void dfs(int u, int p, vector<int>& tails) {
     auto it = lower_bound(tails.begin(), tails.end(), values[u]);

@@ -1,8 +1,8 @@
 // LCA - CP algorithm
 // preprocessing O(NlogN)
 // lca O(logN)
-// Uso: criar LCA com a quantidade de vértices (n) e lista de adjacência (adj)
-// chamar a função preprocess com a raiz da árvore
+// Uso: criar LCA com a quantidade de vertices (n) e lista de adjacencias (adj)
+// chamar a funcao preprocess com a raiz da arvore
 
 struct LCA {
     int n, l, timer;

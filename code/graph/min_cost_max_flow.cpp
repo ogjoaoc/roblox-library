@@ -1,13 +1,13 @@
 // Encontra o menor custo para passar K de fluxo em um grafo com N vertices
 // Funciona com multiplas arestas para o mesmo par de vertices
-// Para encontrar o min cost max flow é só fazer K = infinito
+// Para encontrar o min cost max flow eh so fazer K = infinito
 
 struct Edge {
     int from, to, capacity, cost, id;
 };
 
 vector<vector<array<int, 2>>> adj;
-vector<Edge> edges; // arestas pares são as normais e suas reversas são as impares
+vector<Edge> edges; // arestas pares sao as normais e suas reversas sao as impares
 
 const int INF = LLONG_MAX;
 

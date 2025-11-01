@@ -1,4 +1,4 @@
-// Returns minimum x for which a^x = b (mod m), a and m are coprime.
+// returns minimum x for which a^x = b (mod m), a and m are coprime.
 // if the answer dont need to be greater than some value, the vector<int> can be removed
 int discrete_log(int a, int b, int m) {
     a %= m, b %= m;
