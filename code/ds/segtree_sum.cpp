@@ -1,80 +1,69 @@
 struct SegTree {
-    ll merge(ll a, ll b) { return a + b; }
-    const ll neutral = 0;
+    vector<int> tree;
+    vector<int> lazy;
     int n;
-    vector<ll> t, lazy;
-    vector<bool> replace;
-    inline int lc(int p) { return p * 2; }
-    inline int rc(int p) { return p * 2 + 1; }
-    void push(int p, int l, int r) {
-        if (replace[p]) {
-            t[p] = lazy[p] * (r - l + 1);
-            if (l != r) {
-                lazy[lc(p)] = lazy[p];
-                lazy[rc(p)] = lazy[p];
-                replace[lc(p)] = true;
-                replace[rc(p)] = true;
-            }
-        } else if (lazy[p] != 0) {
-            t[p] += lazy[p] * (r - l + 1);
-            if (l != r) {
-                lazy[lc(p)] += lazy[p];
-                lazy[rc(p)] += lazy[p];
-            }
+    SegTree(int N) {
+        n = N;
+        tree.resize(4 * n);
+        lazy.resize(4 * n, 0); 
+        // build(a);
+    }
+    void push(int lx, int rx, int x) {
+        if (lazy[x] == 0) {
+            return; 
         }
-        replace[p] = false;
-        lazy[p] = 0;
-    }
-    void build(int p, int l, int r, const vector<ll> &v) {
-        if (l == r) {
-            t[p] = v[l];
-        } else {
-            int mid = (l + r) / 2;
-            build(lc(p), l, mid, v);
-            build(rc(p), mid + 1, r, v);
-            t[p] = merge(t[lc(p)], t[rc(p)]);
+        tree[x] += (rx - lx + 1) * lazy[x];
+        if (lx != rx) {
+            lazy[2 * x] += lazy[x];
+            lazy[2 * x + 1] += lazy[x];
         }
+        lazy[x] = 0;
     }
-    void build(int _n) {
-        n = _n;
-        t.assign(n * 4, neutral);
-        lazy.assign(n * 4, 0);
-        replace.assign(n * 4, false);
+    void build(vector<int> &a) {
+        build(0, n - 1, 1, a);
     }
-    void build(const vector<ll> &v) {
-        n = (int)v.size();
-        t.assign(n * 4, neutral);
-        lazy.assign(n * 4, 0);
-        replace.assign(n * 4, false);
-        build(1, 0, n - 1, v);
-    }
-    void build(ll *bg, ll *en) {
-        build(vector<ll>(bg, en));
-    }
-    ll query(int p, int l, int r, int L, int R) {
-        push(p, l, r);
-        if (l > R || r < L) return neutral;
-        if (l >= L && r <= R) return t[p];
-        int mid = (l + r) / 2;
-        auto ql = query(lc(p), l, mid, L, R);
-        auto qr = query(rc(p), mid + 1, r, L, R);
-        return merge(ql, qr);
-    }
-    ll query(int l, int r) { return query(1, 0, n - 1, l, r); }
-    void update(int p, int l, int r, int L, int R, ll val, bool repl = 0) {
-        push(p, l, r);
-        if (l > R || r < L) return;
-        if (l >= L && r <= R) {
-            lazy[p] = val;
-            replace[p] = repl;
-            push(p, l, r);
-        } else {
-            int mid = (l + r) / 2;
-            update(lc(p), l, mid, L, R, val, repl);
-            update(rc(p), mid + 1, r, L, R, val, repl);
-            t[p] = merge(t[lc(p)], t[rc(p)]);
+    void build(int lx, int rx, int x, vector<int> &a) {
+        if (lx == rx) {
+            tree[x] = a[lx];
+            return;
         }
+        int mid = lx + (rx - lx) / 2;
+        build(lx, mid, 2 * x, a);
+        build(mid + 1, rx, 2 * x + 1, a);
+        tree[x] = tree[2 * x] + tree[2 * x + 1];
     }
-    void sumUpdate(int l, int r, ll val) { update(1, 0, n - 1, l, r, val, 0); }
-    void assignUpdate(int l, int r, ll val) { update(1, 0, n - 1, l, r, val, 1); }
-} segsum;
+    void update(int l, int r, ll val) {
+        update(0, n - 1, 1, l, r, val);
+    }
+    void update(int lx, int rx, int x, int l, int r, int val) {
+        push(lx, rx, x);
+        if (rx < l || lx > r) {
+            return;
+        }
+        if (lx >= l && rx <= r) {
+            lazy[x] += val;
+            push(lx, rx, x);
+            return;
+        }
+        int mid = lx + (rx - lx) / 2;
+        update(lx, mid, 2 * x, l, r, val);
+        update(mid + 1, rx, 2 * x + 1, l, r, val);
+        tree[x] = tree[2 * x] + tree[2 * x + 1];
+    }
+    ll query(int l, int r) {
+        return query(0, n - 1, 1, l, r);
+    }
+    ll query(int lx, int rx, int x, int l, int r) {
+        push(lx, rx, x);
+        if (rx < l || lx > r) {
+            return 0; 
+        }
+        if (lx >= l && rx <= r) {
+            return tree[x];
+        }
+        int mid = lx + (rx - lx) / 2;
+        ll s1 = query(lx, mid, 2 * x, l, r);
+        ll s2 = query(mid + 1, rx, 2 * x + 1, l, r);
+        return s1 + s2;
+    }
+};
