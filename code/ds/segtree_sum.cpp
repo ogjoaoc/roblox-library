@@ -12,6 +12,7 @@ struct SegTree {
         if (lazy[x] == 0) {
             return; 
         }
+        // tree[x] += lazy[x];
         tree[x] += (rx - lx + 1) * lazy[x];
         if (lx != rx) {
             lazy[2 * x] += lazy[x];
