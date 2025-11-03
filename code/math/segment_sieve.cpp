@@ -1,5 +1,5 @@
 // Retorna quantos primos tem entre [l, r] (inclusivo)
-// precisa de um vetor com os primos até sqrt(r)
+// precisa de um vetor com os primos ate sqrt(r)
 int seg_sieve(int l, int r){
     if (l > r) return 0;
     vector<bool> is_prime(r - l + 1, true);
