@@ -32,7 +32,7 @@ struct SegTree {
         build(mid + 1, rx, 2 * x + 1, a);
         tree[x] = tree[2 * x] + tree[2 * x + 1];
     }
-    void update(int l, int r, ll val) {
+    void update(int l, int r, int val) {
         update(0, n - 1, 1, l, r, val);
     }
     void update(int lx, int rx, int x, int l, int r, int val) {
@@ -50,10 +50,10 @@ struct SegTree {
         update(mid + 1, rx, 2 * x + 1, l, r, val);
         tree[x] = tree[2 * x] + tree[2 * x + 1];
     }
-    ll query(int l, int r) {
+    int query(int l, int r) {
         return query(0, n - 1, 1, l, r);
     }
-    ll query(int lx, int rx, int x, int l, int r) {
+    int query(int lx, int rx, int x, int l, int r) {
         push(lx, rx, x);
         if (rx < l || lx > r) {
             return 0; 
@@ -62,8 +62,8 @@ struct SegTree {
             return tree[x];
         }
         int mid = lx + (rx - lx) / 2;
-        ll s1 = query(lx, mid, 2 * x, l, r);
-        ll s2 = query(mid + 1, rx, 2 * x + 1, l, r);
+        int s1 = query(lx, mid, 2 * x, l, r);
+        int s2 = query(mid + 1, rx, 2 * x + 1, l, r);
         return s1 + s2;
     }
 };
