@@ -1,3 +1,9 @@
+// pre-compilar os headers: 
+// compilar template com g++ -H e procurar onde esta stdc++.h
+// criar a pasta bits e incluir com "" ou inves de <>
+// compilar stress com: g++ -pipe -O3 -flto -march=native -mtune=native gen.ccp
+// faz bastante diferença no runtime
+
 #include <bits/stdc++.h>
 #include <cstdlib> 
 #include <ctime> 
