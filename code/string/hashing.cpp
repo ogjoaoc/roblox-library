@@ -4,8 +4,10 @@
 // query_inv(l, r) from right to left - O(1)
 // patrocinado por tiagodfs
 
+mt19937 rng(time(nullptr));
+
 struct Hash {
-    const int X = 2147483647;
+    const int X = rng();
     const int MOD = 1e9+7;
     int n; string s;
     vector<int> h, hi, p;
