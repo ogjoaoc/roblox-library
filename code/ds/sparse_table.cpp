@@ -1,4 +1,4 @@
-// 1-index, O(1)
+// 0-index, O(1)
 struct SparseTable {
     vector<vector<int>> st;
     int max_log;
