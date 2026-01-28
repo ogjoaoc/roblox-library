@@ -1,46 +1,50 @@
-struct SegTree {
-    int n;
-    vector<vector<int>> tree;
- 
-    SegTree(vector<int> &a) {
-        n = a.size();
-        tree.resize(4 * n);
-        build(1, 0, n - 1, a);
-    }
-    void build(int x, int lx, int rx, vector<int> &a) {
-        if (lx == rx) {
-            tree[x] = { a[lx] };
-            return;
-        }
-        int mid = lx + (rx - lx)/2;
-        build(2 * x, lx, mid, a);
-        build(2 * x + 1, mid + 1, rx, a);
-        auto &L = tree[2 * x], &R = tree[2 * x + 1];
-        tree[x].resize(L.size() + R.size());
-        merge(L.begin(), L.end(), R.begin(), R.end(), tree[x].begin());
-    }
-    int query(int x, int lx, int rx, int l, int r) {
-        if (lx >= l && rx <= r) {
-            auto &v = tree[x];
-            return v.end() - upper_bound(v.begin(), v.end(), r);
-        }
-        if (rx < l || lx > r) {
-            return 0;
-        }
-        int mid = lx + (rx - lx)/2;
-        return query(2 * x, lx, mid, l, r) + query(2 * x + 1, mid + 1, rx, l, r);
-    }
-    int query(int l, int r) {
-       return query(1, 0, n - 1, l, r); 
-    }
-}
+#define all(x) x.begin(), x.end()
 
-// Checar se o range eh todo distinto
-vector<int> nr(n);
-map<int, int> mp;
-for (int i = n - 1; i >= 0; i--) {
-    auto it = mp.find(a[i]);
-    nr[i] = it != mp.end() ? it->second : n;
-    mp[a[i]] = i;
-}
-SegTree seg(nr);
+struct MST {
+  int n;
+  vector<vector<int>> tree;
+  MST(vector<int> &a) {
+    n = a.size();
+    tree.resize(4 * n);
+    build(1, 0, n - 1, a);
+  }
+  void build(int x, int lx, int rx, vector<int> &a) {
+    if (lx == rx) {
+      tree[x] = { a[lx] };
+      return;
+    }
+    int mid = lx + (rx - lx) / 2;
+    build(2 * x, lx, mid, a);
+    build(2 * x + 1, mid + 1, rx, a);
+    auto &L = tree[2 * x], &R = tree[2 * x + 1];
+    tree[x].resize(L.size() + R.size());
+    merge(all(L), all(R), tree[x].begin());
+  }
+  int query(int x, int lx, int rx, int l, int r, int val) {
+    if (lx > r || rx < l) return 0;
+    if (lx >= l && rx <= r) {
+      auto &v = tree[x];
+      return lower_bound(all(v), val) - v.begin();
+    }
+    int mid = lx + (rx - lx) / 2;
+    return query(2 * x, lx, mid, l, r, val) + query(2 * x + 1, mid + 1, rx, l, r, val);
+  }
+  int query(int l, int r, int val) {
+    if (l > r) return 0;
+    return query(1, 0, n - 1, l, r, val);
+  }
+};
+
+/* mst.query(l, r, l) retorna quantos caras distintos no range
+  map<int, int> last;
+  for (int i = 0; i < n; i++) {
+    if (last.count(a[i])) {
+      esq[i] = last[a[i]];
+    } else {
+      esq[i] = -1;
+    }
+    last[a[i]] = i;
+  }
+  MST mst(esq);
+  jogar vetor de ultima aparicao na seg
+*/
