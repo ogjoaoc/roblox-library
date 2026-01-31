@@ -10,23 +10,23 @@ struct Dinic {
     const long long flow_inf = 1e18;
     vector<FlowEdge> edges;
     vector<vector<int>> adj;
-    int n, m = 0;
-    int s, t;
+    int qntV, qntE = 0;
+    int source, sink;
     vector<int> level, ptr;
     queue<int> q;
 
-    Dinic(int n, int s, int t) : n(n), s(s), t(t) {
-        adj.resize(n);
-        level.resize(n);
-        ptr.resize(n);
+    Dinic(int qntV, int source, int sink) : qntV(qntV), source(source), sink(sink) {
+        adj.resize(qntV);
+        level.resize(qntV);
+        ptr.resize(qntV);
     }
 
     void add_edge(int from, int to, long long cap) {
         edges.emplace_back(from, to, cap);
         edges.emplace_back(to, from, 0);
-        adj[from].push_back(m);
-        adj[to].push_back(m + 1);
-        m += 2;
+        adj[from].push_back(qntE);
+        adj[to].push_back(qntE + 1);
+        qntE += 2;
     }
 
     bool bfs() {
@@ -42,13 +42,13 @@ struct Dinic {
                 q.push(edges[id].to);
             }
         }
-        return level[t] != -1;
+        return level[sink] != -1;
     }
 
     long long dfs(int from, long long pushed) {
         if (pushed == 0)
             return 0;
-        if (from == t)
+        if (from == sink)
             return pushed;
         for (int& cid = ptr[from]; cid < (int)adj[from].size(); cid++) {
             int id = adj[from][cid];
@@ -65,16 +65,16 @@ struct Dinic {
         return 0;
     }
 
-    long long flow() {
+    long long max_flow() {
         long long f = 0;
         while (true) {
             fill(level.begin(), level.end(), -1);
-            level[s] = 0;
-            q.push(s);
+            level[source] = 0;
+            q.push(source);
             if (!bfs())
                 break;
             fill(ptr.begin(), ptr.end(), 0);
-            while (long long pushed = dfs(s, flow_inf)) {
+            while (long long pushed = dfs(source, flow_inf)) {
                 f += pushed;
             }
         }
