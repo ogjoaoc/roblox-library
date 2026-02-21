@@ -70,6 +70,7 @@ struct SegLazy {
 
     void update(int l, int r, L v) {
         int l0 = l, r0 = r;
+        push(l); push(r);
         for (l += n, r += n + 1; l < r; l >>= 1, r >>= 1) {
             if (l & 1) apply(l++, v);
             if (r & 1) apply(--r, v);
