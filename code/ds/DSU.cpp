@@ -1,28 +1,35 @@
 struct DSU {
-    vector<int> par, rank, sz;
-    int c;
-    DSU(int n) : par(n + 1), rank(n + 1, 0), sz(n + 1, 1), c(n) {
-        for (int i = 1; i <= n; ++i) par[i] = i;
+    vector<int> parent, size;
+    int C;
+    DSU(int n) : parent(n + 1), size(n + 1), C(n) {
+        for (int i = 1; i <= n; i++) {
+            parent[i] = i;
+            size[i] = 1;
+        }
     }
-    int find(int i) {
-        return (par[i] == i ? i : (par[i] = find(par[i])));
+    int find(int a) {
+        if (parent[a] == a) return a;
+        return parent[a] = find(parent[a]);
     }
-    bool same(int i, int j) {
-        return find(i) == find(j);
+    int same(int a, int b) {
+        return find(a) == find(b);
     }
-    int get_size(int i) {
-        return sz[find(i)];
+    int get_size(int a) {
+        return size[find(a)];
     }
     int count() {
-        return c;  // quantos componentes conexos
+        return C;
     }
-    int merge(int i, int j) {
-        if ((i = find(i)) == (j = find(j))) return -1;
-        else --c;
-        if (rank[i] > rank[j]) swap(i, j);
-        par[i] = j;
-        sz[j] += sz[i];
-        if (rank[i] == rank[j]) rank[j]++;
-        return j;
+    void join(int a, int b) {
+        int pA = find(a);
+        int pB = find(b);
+        if (pA != pB) {
+            C--;
+            if (size[pA] > size[pB]) {
+                swap(pA, pB);
+            }
+            parent[pA] = pB;
+            size[pB] += size[pA];
+        }
     }
 };
