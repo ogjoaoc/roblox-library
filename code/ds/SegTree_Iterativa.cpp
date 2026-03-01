@@ -20,7 +20,7 @@ struct SegTree {
         for (int i = n - 1; i > 0; --i)
             tree[i] = combine(tree[i * 2], tree[i * 2 + 1]);
     }
-    T range_query(int l, int r) {
+    T query(int l, int r) {
         T res_l = neutral_value, res_r = neutral_value;
  
         for (l += n, r += n + 1; l < r; l >>= 1, r >>= 1) {
