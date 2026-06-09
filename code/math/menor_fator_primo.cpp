@@ -1,9 +1,9 @@
-const int MAXN = 1000001; 
+const int MAXN = 2e6 + 2; 
 int spf[MAXN];
-vector<int> primos;
+vector<int> primes;
 
-void crivo() {
-    for (int i = 0; i < MAXN; i++) spf[i] = [i];
+void sieve() {
+    for (int i = 0; i < MAXN; i++) spf[i] = i;
     for (int i = 2; i * i < MAXN; i++) {
         if (spf[i] == i) {
             for (int j = i * i; j < MAXN; j += i) {
@@ -15,18 +15,18 @@ void crivo() {
     }
     for (int i = 2; i < MAXN; i++) {
         if (spf[i] == i) {
-            primos.push_back(i);
+            primes.push_back(i);
         }
     }
 }
 
-map<int, int> fatora(int n) {
-    map<int, int> fatores;
+map<int, int> factorize(int n) {
+    map<int, int> factors;
     while (n > 1) {
-        fatores[spf[n]]++;
+        factors[spf[n]]++;
         n /= spf[n];
     }
-    return fatores;
+    return factors;
 }
 
 int numero_de_divisores(int n) {
