@@ -7,6 +7,7 @@ struct Point {
 	bool operator==(P p) const { return tie(x,y)==tie(p.x,p.y); }
 	P operator+(P p) const { return P(x+p.x, y+p.y); }
 	P operator-(P p) const { return P(x-p.x, y-p.y); }
+	P operator^(T p) const { return x*p.y - y*p.x; }
 	P operator*(T d) const { return P(x*d, y*d); }
 	P operator/(T d) const { return P(x/d, y/d); }
 	T dot(P p) const { return x*p.x + y*p.y; }
@@ -14,6 +15,9 @@ struct Point {
 	T cross(P a, P b) const { return (a-*this).cross(b-*this); }
 	T dist2() const { return x*x + y*y; }
 	double dist() const { return sqrt((double)dist2()); }
+
+	T orient(pt a, pt b, pt c) {return cross(b-a,c-a);}
+
 	// angle to x-axis in interval [-pi, pi]
 	double angle() const { return atan2(y, x); }
 	P unit() const { return *this/dist(); } // makes dist()=1
@@ -24,4 +28,17 @@ struct Point {
 		return P(x*cos(a)-y*sin(a),x*sin(a)+y*cos(a)); }
 	friend ostream& operator<<(ostream& os, P p) {
 		return os << "(" << p.x << "," << p.y << ")"; }
+
+	bool properInter(P a, P b, P c, P d) {
+		double oa = orient(c,d,a),
+				ob = orient(c,d,b),
+				oc = orient(a,b,c),
+				od = orient(a,b,d);
+		// Proper intersection exists iff opposite signs
+		if (oa*ob < 0 && oc*od < 0) {
+			int ans = (a*ob - b*oa) / (ob-oa);
+			return true;
+		}
+		return false;
+	}
 };
