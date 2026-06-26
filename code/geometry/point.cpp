@@ -10,8 +10,8 @@ struct Point {
 	P operator*(T d) const { return P(x*d, y*d); }
 	P operator/(T d) const { return P(x/d, y/d); }
 	T operator^(P p) const { return x*p.y - y*p.x; }
-	T dot(P p) const { return x*p.x + y*p.y; }
-	T cross(P p) const { return x*p.y - y*p.x; }
+	T dot(P p) const { return x*p.x + y*p.y; } // ||a|| * ||b|| * cos(theta)
+	T cross(P p) const { return x*p.y - y*p.x; } // ||a|| * ||b|| * sin(theta)
 	T cross(P a, P b) const { return (a-*this).cross(b-*this); }
 	T dist2() const { return x*x + y*y; }
 	double dist() const { return sqrt((double)dist2()); }
