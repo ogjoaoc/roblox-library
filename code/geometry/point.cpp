@@ -41,6 +41,13 @@ struct Point {
         return orient(a,b,p) == 0 && inDisk(a,b,p);
     }
 
+	// check if point is in BAC
+	bool inAngle(pt a, pt b, pt c, pt p) {
+		assert(orient(a,b,c) != 0);
+		if (orient(a,b,c) < 0) swap(b,c);
+		return orient(a,b,p) >= 0 && orient(a,c,p) <= 0;
+	}
+
 	bool properInter(P a, P b, P c, P d, P &ans) {
 		double oa = orient(c,d,a),
 				ob = orient(c,d,b),
