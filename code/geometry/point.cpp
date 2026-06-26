@@ -25,9 +25,12 @@ struct Point {
 	P normal() const { return perp().unit(); }
 	// returns point rotated 'a' radians ccw around the origin
 	P rotate(double a) const {
-        return P(x*cos(a)-y*sin(a),x*sin(a)+y*cos(a)); }
-        friend ostream& operator<<(ostream& os, P p) {
-		return os << "(" << p.x << "," << p.y << ")"; }
+        return P(x*cos(a)-y*sin(a),x*sin(a)+y*cos(a)); 
+	}
+        
+	friend ostream& operator<<(ostream& os, P p) {
+		return os << "(" << p.x << "," << p.y << ")"; 
+	}
 
     // inside the disk of diameter [a, b]
     bool inDisk(P a, P b, P p) {
