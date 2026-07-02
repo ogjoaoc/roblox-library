@@ -20,6 +20,12 @@ struct Point {
     
 	// angle to x-axis in interval [-pi, pi]
 	double angle() const { return atan2(y, x); }
+
+	// angle between v and w in [0, pi]
+	double angle(pt v, pt w) {
+		return acos(clamp(dot(v,w) / abs(v) / abs(w), -1.0, 1.0));
+	}
+
 	P unit() const { return *this/dist(); } // makes dist()=1
 	P perp() const { return P(-y, x); } // rotates +90 degrees
 	P normal() const { return perp().unit(); }
