@@ -54,6 +54,14 @@ struct Point {
 		return orient(a,b,p) >= 0 && orient(a,c,p) <= 0;
 	}
 
+	// return angle BAC ccw in interval [0, 2pi]
+	double orientedAngle(pt a, pt b, pt c) {
+		if (orient(a,b,c) >= 0)
+			return angle(b-a, c-a);
+		else
+			return 2*M_PI - angle(b-a, c-a);
+	}
+
 	bool properInter(P a, P b, P c, P d, P &ans) {
 		double oa = orient(c,d,a),
 				ob = orient(c,d,b),
